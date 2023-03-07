@@ -1,14 +1,66 @@
-タイトル：<%= @question.title %><br>
-質問内容：<%= @question.content %><br>
-投稿者名：<%= @question.name %>
 
-<%= form_with(model: [@question, @answer], local: true) do |form| %><br>
-  <%= form.text_area :content, placeholder: "回答する" %><br>
-  <%= form.text_field :name, placeholder: "投稿者名" %><br>
-  <%= form.submit "POST" %><br>
-<% end %>
+<div class="show-main" >
 
-<% @answers.each do |answer| %>
-  回答：<%= answer.content %><br>
-  投稿者名：<%= answer.name %><br><br>
-<% end %>
+  <%# top %>
+  <div class="show-main_top" >
+    <%# 質問表示ボックス %>
+    <div class="question-display-box" > 
+      <div class='question-display-box-top'>
+        <div class="question-display-box-top_text" >
+          <div class="question-display-box-top_title">
+            <%= @question.title %>
+          </div>
+          <div class="question-display-box-top_name">
+            by <%= @question.name %>
+          </div>
+        </div>
+      </div>
+      <div class='question-display-box-main'>
+        <div class="question-display-box-top_content">
+          <%= @question.content %><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <%# bottom %>
+  <div class="show-main_bottom" >
+    <%# 回答表示リスト %>
+    <div class="answer-items" >
+      <% @answers.each do |answer| %>
+        <div class="answer-item">
+          <div class="answer-item__content">
+            <%= answer.content %>
+          </div>
+          <div class="answer-item__name">
+            <%= answer.name %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%# 回答作成フォーム %>
+    <div class="answer-form" >
+      <div class="answer-form-content">
+        <div class="answer-form-header">
+        </div>
+        <div class="answer-form-input-items">
+          <div class="answer-form-main">
+            <%= form_with(model: [@question, @answer], local: true) do |form| %>
+              <div class="answer-form-input-items__content" >
+                <%= form.text_area :content, placeholder: "回答する" %>
+              </div>
+              <div class="answer-form-input-items__name" >
+                <%= form.text_field :name, placeholder: "投稿者名" %>
+              </div>
+              <div class="answer-form-input-items__submit" >
+                <%= form.submit "POST" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
